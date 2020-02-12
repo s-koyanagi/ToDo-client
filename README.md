@@ -12,6 +12,6 @@ $ npm install
 # 起動  
 $ npm run serve  
 ```
-http://localhost:8080 からアプリケーションにアクセスできます。
+http://localhost:3000 からアプリケーションにアクセスできます。
 ## 機能一覧
-now editing
+now editing...
