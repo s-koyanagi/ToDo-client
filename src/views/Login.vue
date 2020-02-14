@@ -1,12 +1,5 @@
 <template>
   <v-app id="login">
-    <!-- <v-container> -->
-    <!-- <v-row>
-        <v-col align="center"><v-icon>mdi-home</v-icon></v-col>
-      </v-row>
-      <v-row>
-        <v-col align="center"><h2>ToDo管理アプリ</h2></v-col>
-      </v-row> -->
     <v-row justify="center" align-content="center">
       <v-col cols="2" sm="3" md="3" lg="3" xl="2">
         <v-card>
@@ -56,12 +49,6 @@
         </v-card>
       </v-col>
     </v-row>
-    <!-- </v-container> -->
-    <!-- <v-row class="blue lighten-4" justify="center" align-content="center">
-      <v-col cols="3">
-        <v-card color="blue" outlined tile height="150"></v-card>
-      </v-col>
-    </v-row> -->
   </v-app>
 </template>
 <script>
