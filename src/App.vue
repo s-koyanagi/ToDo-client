@@ -1,7 +1,9 @@
 <template>
   <v-app>
     <v-content>
-      <router-view class="grey lighten-3"></router-view>
+      <v-container fluid fill-height class="grey lighten-3">
+        <router-view></router-view>
+      </v-container>
     </v-content>
   </v-app>
 </template>
@@ -11,8 +13,6 @@ import Vue from 'vue'
 
 export default Vue.extend({
   name: 'App',
-  data: () => ({
-    //
-  })
+  data: () => ({})
 })
 </script>
