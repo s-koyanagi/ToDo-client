@@ -9,7 +9,7 @@
           <p class="text-center mb-6 headline font-weight-light">
             Sign In
           </p>
-          <v-form>
+          <v-form ref="login_form">
             <v-text-field
               id="userid"
               label="ID"
@@ -18,6 +18,7 @@
               dense="true"
               outlined
               class="login-form"
+              v-model="email"
             />
             <v-text-field
               id="password"
@@ -28,6 +29,7 @@
               outlined
               class="login-form"
               hide-details="true"
+              v-model="password"
             />
             <a style="text-align:center;" href="#"
               >パスワードを忘れた方はコチラ</a
@@ -42,6 +44,7 @@
             class="login-button mb-2"
             large
             rounded
+            @click="submit()"
             >ログイン</v-btn
           >
         </v-card-actions>
@@ -49,11 +52,20 @@
     </v-col>
   </v-row>
 </template>
-<script>
+<script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
+import LoginForm from '../models/form/loginForm'
+import { loginModule } from '@/store/modules/loginUser'
 
 @Component
-export default class Login extends Vue {}
+export default class Login extends Vue {
+  email: string = ''
+  password: string = ''
+
+  submit() {
+    loginModule.login(new LoginForm(this.email, this.password))
+  }
+}
 </script>
 <style lang="stylus" scoped>
 .login-form {
