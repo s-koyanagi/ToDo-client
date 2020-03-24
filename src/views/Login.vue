@@ -9,7 +9,7 @@
           <p class="text-center mb-6 headline font-weight-light">
             Sign In
           </p>
-          <v-form ref="login_form">
+          <v-form ref="loginForm" v-model="isValidated">
             <v-text-field
               id="userid"
               label="ID"
@@ -19,6 +19,7 @@
               outlined
               class="login-form"
               v-model="email"
+              :rules="required"
             />
             <v-text-field
               id="password"
@@ -28,8 +29,8 @@
               dense="true"
               outlined
               class="login-form"
-              hide-details="true"
               v-model="password"
+              :rules="required"
             />
             <a style="text-align:center;" href="#"
               >パスワードを忘れた方はコチラ</a
@@ -42,6 +43,7 @@
             color="primary"
             full-width="true"
             class="login-button mb-2"
+            :disabled="!isValidated"
             large
             rounded
             @click="submit()"
@@ -53,14 +55,24 @@
   </v-row>
 </template>
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue, Watch } from 'vue-property-decorator'
 import LoginForm from '../models/form/loginForm'
 import { loginModule } from '@/store/modules/loginUser'
 
 @Component
 export default class Login extends Vue {
+  // フォーム
   email: string = ''
   password: string = ''
+
+  // バリデーション
+  isValidated: boolean = false
+  private required = [(v: any) => !!v || '必ず入力してください']
+
+  @Watch('required')
+  kansi() {
+    this.isValidated = true
+  }
 
   submit() {
     loginModule.login(new LoginForm(this.email, this.password))
