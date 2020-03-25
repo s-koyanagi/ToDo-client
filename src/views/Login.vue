@@ -69,11 +69,6 @@ export default class Login extends Vue {
   isValidated: boolean = false
   private required = [(v: any) => !!v || '必ず入力してください']
 
-  @Watch('required')
-  kansi() {
-    this.isValidated = true
-  }
-
   submit() {
     loginModule.login(new LoginForm(this.email, this.password))
   }
