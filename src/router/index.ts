@@ -2,7 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../views/Login.vue'
 import Home from '../views/Home.vue'
-import { loginModule } from '@/store/modules/loginUser'
+import Test from '../views/Test.vue'
+import { loginUser } from '@/store/modules/loginUser'
 
 Vue.use(VueRouter)
 
@@ -19,6 +20,14 @@ const routes = [
     meta: {
       requiresAuth: true
     }
+  },
+  {
+    path: '/test',
+    name: 'test',
+    component: Test,
+    meta: {
+      requiresAuth: true
+    }
   }
 ]
 
@@ -30,7 +39,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (loginModule.getIsAuthenticated) {
+    if (loginUser.getIsAuthenticated) {
       next()
     } else {
       next({ path: '/' })
