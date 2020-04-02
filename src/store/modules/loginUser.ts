@@ -7,7 +7,7 @@ import {
 } from 'vuex-module-decorators'
 import store from '../index'
 import User from '@/models/dto/user'
-import axios from 'axios'
+import axios, { AxiosError, AxiosResponse } from 'axios'
 import LoginForm from '@/models/form/loginForm'
 import router from '@/router'
 
@@ -33,16 +33,20 @@ class LoginUser extends VuexModule {
     this.user = new User()
   }
 
-  @Action
+  @Action({ rawError: true })
   async login(loginForm: LoginForm) {
     const formData = new FormData()
     formData.append('email', loginForm.id)
     formData.append('password', loginForm.password)
-    await axios.post('http://localhost:8080/login', formData).then(res => {
-      this.SET_LOGIN_USER_INFO(res.data)
-      router.push({ path: '/home' })
-    })
+    await axios
+      .post('http://localhost:8080/login', formData)
+      .then((res: AxiosResponse) => {
+        this.SET_LOGIN_USER_INFO(res.data)
+        router.push({ path: '/home' })
+      })
+      .catch((error: AxiosError) => {})
   }
+
   get getUserInfo(): User {
     return this.user
   }
@@ -50,4 +54,4 @@ class LoginUser extends VuexModule {
     return this.isAuthenticated
   }
 }
-export const loginModule = getModule(LoginUser)
+export const loginUser = getModule(LoginUser)
