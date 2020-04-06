@@ -1,59 +1,61 @@
 <template>
-  <v-row justify="center" align-content="center">
-    <v-card width="350">
-      <v-card-text>
-        <p class="text-center">
-          <v-icon size="70">mdi-account</v-icon>
-        </p>
-        <p class="text-center mb-6 headline font-weight-light">
-          Sign In
-        </p>
-        <p class="text-center red--text" v-if="isVisible">
-          {{ validationMessage }}
-        </p>
-        <v-form ref="loginForm">
-          <v-text-field
-            id="userid"
-            label="ID"
-            type="text"
-            placeholder=" "
-            dense="true"
-            outlined
-            class="login-form"
-            v-model="email"
-            validate-on-blur="true"
-            :rules="required"
-          />
-          <v-text-field
-            id="password"
-            label="Password"
-            type="password"
-            placeholder=" "
-            dense="true"
-            outlined
-            class="login-form"
-            v-model="password"
-            :rules="required"
-          />
-          <a style="text-align:center;" href="#"
-            >パスワードを忘れた方はコチラ</a
+  <v-container fill-height>
+    <v-row justify="center">
+      <v-card width="350">
+        <v-card-text>
+          <p class="text-center">
+            <v-icon size="70">mdi-account</v-icon>
+          </p>
+          <p class="text-center mb-6 headline font-weight-light">
+            Sign In
+          </p>
+          <p class="text-center red--text" v-if="isVisible">
+            {{ validationMessage }}
+          </p>
+          <v-form ref="loginForm">
+            <v-text-field
+              id="userid"
+              label="ID"
+              type="text"
+              placeholder=" "
+              dense="true"
+              outlined
+              class="login-form"
+              v-model="email"
+              validate-on-blur="true"
+              :rules="required"
+            />
+            <v-text-field
+              id="password"
+              label="Password"
+              type="password"
+              placeholder=" "
+              dense="true"
+              outlined
+              class="login-form"
+              v-model="password"
+              :rules="required"
+            />
+            <a style="text-align:center;" href="#"
+              >パスワードを忘れた方はコチラ</a
+            >
+          </v-form>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn
+            block="true"
+            color="primary"
+            full-width="true"
+            class="login-button mb-2"
+            large
+            rounded
+            @click="submit()"
+            >ログイン</v-btn
           >
-        </v-form>
-      </v-card-text>
-      <v-card-actions>
-        <v-btn
-          block="true"
-          color="primary"
-          full-width="true"
-          class="login-button mb-2"
-          large
-          rounded
-          @click="submit()"
-          >ログイン</v-btn
-        >
-      </v-card-actions>
-    </v-card>
-  </v-row>
+        </v-card-actions>
+      </v-card>
+    </v-row>
+  </v-container>
 </template>
 
 <script lang="ts">
