@@ -1,0 +1,27 @@
+<template>
+  <v-app-bar
+    absolute
+    color="teal lighten-3"
+    dark
+    hide-on-scroll
+    scroll-target="#scrolling-techniques-4"
+    app
+  >
+    <v-app-bar-nav-icon></v-app-bar-nav-icon>
+
+    <v-toolbar-title>ToDo</v-toolbar-title>
+
+    <v-spacer></v-spacer>
+
+    <v-btn outlined>
+      ログアウト
+    </v-btn>
+  </v-app-bar>
+</template>
+
+<script lang="ts">
+import { Component, Vue, Watch } from 'vue-property-decorator'
+
+@Component
+export default class MenuBar extends Vue {}
+</script>
