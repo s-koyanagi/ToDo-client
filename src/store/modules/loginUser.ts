@@ -42,7 +42,7 @@ class LoginUser extends VuexModule {
       .post('http://localhost:8080/login', formData)
       .then((res: AxiosResponse) => {
         this.SET_LOGIN_USER_INFO(res.data)
-        router.push({ path: '/home' })
+        router.push({ path: '/kanban' })
       })
       .catch((error: AxiosError) => {})
   }
@@ -50,6 +50,7 @@ class LoginUser extends VuexModule {
   get getUserInfo(): User {
     return this.user
   }
+
   get getIsAuthenticated(): boolean {
     return this.isAuthenticated
   }
