@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../views/Login.vue'
 import Home from '../views/Home.vue'
-import Test from '../views/Test.vue'
+import Kanban from '../views/Kanban.vue'
 import { loginUser } from '@/store/modules/loginUser'
 
 Vue.use(VueRouter)
@@ -22,9 +22,9 @@ const routes = [
     }
   },
   {
-    path: '/test',
-    name: 'test',
-    component: Test,
+    path: '/kanban',
+    name: 'kanban',
+    component: Kanban,
     meta: {
       requiresAuth: true
     }
