@@ -1,18 +1,20 @@
 <template>
   <v-app>
-    <v-content>
-      <v-container fluid fill-height class="grey lighten-3">
-        <router-view></router-view>
-      </v-container>
+    <menu-bar v-if="$route.name != 'login'"></menu-bar>
+    <v-content class="grey lighten-3">
+      <router-view></router-view>
     </v-content>
   </v-app>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { Component, Vue } from 'vue-property-decorator'
+import MenuBar from './components/orgnisms/MenuBar.vue'
 
-export default Vue.extend({
-  name: 'App',
-  data: () => ({})
+@Component({
+  components: {
+    MenuBar
+  }
 })
+export default class App extends Vue {}
 </script>
