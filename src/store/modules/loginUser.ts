@@ -39,7 +39,7 @@ class LoginUser extends VuexModule {
     formData.append('email', loginForm.id)
     formData.append('password', loginForm.password)
     await axios
-      .post('http://localhost:8080/login', formData)
+      .post('http://localhost:8080/login', formData, { withCredentials: true })
       .then((res: AxiosResponse) => {
         this.SET_LOGIN_USER_INFO(res.data)
         router.push({ path: '/kanban' })
