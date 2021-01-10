@@ -7,8 +7,6 @@
     scroll-target="#scrolling-techniques-4"
     app
   >
-    <v-app-bar-nav-icon></v-app-bar-nav-icon>
-
     <v-toolbar-title>ToDo</v-toolbar-title>
 
     <v-spacer></v-spacer>
@@ -23,5 +21,5 @@
 import { Component, Vue, Watch } from 'vue-property-decorator'
 
 @Component
-export default class MenuBar extends Vue {}
+export default class TopBar extends Vue {}
 </script>
