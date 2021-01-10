@@ -1,19 +1,24 @@
 <template>
   <v-app>
-    <menu-bar v-if="$route.name != 'login'"></menu-bar>
-    <v-content class="grey lighten-3">
-      <router-view></router-view>
+    <!-- <side-bar v-if="$route.name != 'login'"></side-bar> -->
+    <top-bar v-if="$route.name != 'login'"></top-bar>
+    <v-content>
+      <v-main>
+        <router-view></router-view>
+      </v-main>
     </v-content>
   </v-app>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import MenuBar from './components/orgnisms/MenuBar.vue'
+import TopBar from './components/orgnisms/TopBar.vue'
+import SideBar from './components/orgnisms/SideBar.vue'
 
 @Component({
   components: {
-    MenuBar
+    TopBar,
+    SideBar
   }
 })
 export default class App extends Vue {}
