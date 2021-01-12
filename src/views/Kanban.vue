@@ -14,28 +14,26 @@
     <v-col cols="10">
       <v-card min-height="800" outlined tile>
         <v-app-bar class="ma-5" color="white" flat elevate-on-scroll>
-          <v-btn x-large icon><v-icon>mdi-arrow-left</v-icon></v-btn>
+          <v-btn x-large icon><v-icon>mdi-chevron-left</v-icon></v-btn>
           <v-toolbar-title class="mr-3">2020/1/1</v-toolbar-title>
-          <v-btn x-large icon><v-icon>mdi-arrow-right</v-icon></v-btn>
+          <v-btn x-large icon><v-icon>mdi-chevron-right</v-icon></v-btn>
           <v-spacer></v-spacer>
           <v-btn icon><v-icon>mdi-dots-vertical</v-icon></v-btn>
         </v-app-bar>
-        <v-card-text class="ma-5">
-          <v-simple-table>
+        <v-card-text>
+          <v-simple-table class="ma-5">
             <thead>
               <tr>
+                <th>type</th>
                 <th>subject</th>
                 <th>status</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>友達とランチ</td>
-                <td>完了</td>
-              </tr>
-              <tr>
-                <td>評価書提出</td>
-                <td>進行中</td>
+              <tr v-for="task in tableData" :key="task.id">
+                <td>{{ task.type }}</td>
+                <td>{{ task.subject }}</td>
+                <td>{{ task.status }}</td>
               </tr>
             </tbody>
           </v-simple-table>
@@ -51,5 +49,13 @@ import { Component, Vue, Watch } from 'vue-property-decorator'
 @Component({
   components: {}
 })
-export default class Kanban extends Vue {}
+export default class Kanban extends Vue {
+  tableData = [
+    { id: 1, type: 'プライベート', subject: '友達とランチ', status: '未着手' },
+    { id: 2, type: '仕事', subject: 'テスト仕様書作成', status: '未着手' },
+    { id: 3, type: '仕事', subject: '人事提出物', status: '未着手' },
+    { id: 4, type: '家事', subject: '風呂掃除', status: '未着手' },
+    { id: 5, type: '家事', subject: '夕飯買い物', status: '未着手' }
+  ]
+}
 </script>
