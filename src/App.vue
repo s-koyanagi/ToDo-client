@@ -12,8 +12,8 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import TopBar from './components/orgnisms/TopBar.vue'
-import SideBar from './components/orgnisms/SideBar.vue'
+import TopBar from './components/organisms/TopBar.vue'
+import SideBar from './components/organisms/SideBar.vue'
 
 @Component({
   components: {
