@@ -1,20 +1,25 @@
 <template>
-  <v-card>
+  <v-sheet>
     <v-card-title>
-      <v-text-field
-        v-model="search"
-        append-icon="mdi-magnify"
-        label="Search"
-        single-line
-        hide-details
-      ></v-text-field>
+      全てのタスク
+      <v-spacer></v-spacer>
+      <div style="width:300px">
+        <v-text-field
+          v-if="useSearch"
+          v-model="search"
+          append-icon="mdi-magnify"
+          label="Search"
+          single-line
+          hide-details
+        ></v-text-field>
+      </div>
     </v-card-title>
     <v-data-table
       :headers="header"
       :items="data"
       :search="search"
     ></v-data-table>
-  </v-card>
+  </v-sheet>
 </template>
 
 <script lang="ts">
@@ -26,6 +31,8 @@ export default class DataTable extends Vue {
   private header!: object[]
   @Prop()
   private data!: object[]
+  @Prop()
+  private useSearch!: boolean
   search: string = ''
 }
 </script>
