@@ -8,15 +8,13 @@
 
     <v-col cols="10">
       <v-card min-height="800" outlined tile>
-        <v-app-bar class="ma-5" color="white" flat elevate-on-scroll>
-          <v-btn x-large icon><v-icon>mdi-chevron-left</v-icon></v-btn>
-          <v-toolbar-title class="mr-3">2020/1/1</v-toolbar-title>
-          <v-btn x-large icon><v-icon>mdi-chevron-right</v-icon></v-btn>
-          <v-spacer></v-spacer>
-          <v-btn icon><v-icon>mdi-dots-vertical</v-icon></v-btn>
-        </v-app-bar>
         <v-card-text>
-          <data-table class="ma-5" :data="tableData" :header="head">
+          <data-table
+            class="ma-5"
+            :data="tableData"
+            :header="head"
+            :useSearch="true"
+          >
           </data-table>
         </v-card-text>
       </v-card>
@@ -43,10 +41,20 @@ export default class Kanban extends Vue {
 
   tableData = [
     { id: 1, type: 'プライベート', subject: '友達とランチ', status: '未着手' },
-    { id: 2, type: '仕事', subject: 'テスト仕様書作成', status: '未着手' },
+    { id: 2, type: '仕事', subject: 'テスト仕様書作成', status: '着手中' },
     { id: 3, type: '仕事', subject: '人事提出物', status: '未着手' },
-    { id: 4, type: '家事', subject: '風呂掃除', status: '未着手' },
-    { id: 5, type: '家事', subject: '夕飯買い物', status: '未着手' }
+    { id: 4, type: '家事', subject: '風呂掃除', status: '着手中' },
+    { id: 5, type: '家事', subject: '夕飯買い物', status: '未着手' },
+    { id: 6, type: 'プライベート', subject: '友達とランチ', status: '未着手' },
+    { id: 7, type: '仕事', subject: 'テスト仕様書作成', status: '未着手' },
+    { id: 8, type: '仕事', subject: '人事提出物', status: '未着手' },
+    { id: 9, type: '家事', subject: '風呂掃除', status: '着手中' },
+    { id: 10, type: '家事', subject: '夕飯買い物', status: '未着手' },
+    { id: 11, type: 'プライベート', subject: '友達とランチ', status: '未着手' },
+    { id: 12, type: '仕事', subject: 'テスト仕様書作成', status: '未着手' },
+    { id: 13, type: '仕事', subject: '人事提出物', status: '着手中' },
+    { id: 14, type: '家事', subject: '風呂掃除', status: '未着手' },
+    { id: 15, type: '家事', subject: '夕飯買い物', status: '未着手' }
   ]
 }
 </script>
