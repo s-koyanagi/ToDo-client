@@ -15,6 +15,11 @@
             :header="head"
             :useSearch="true"
           >
+            <template v-slot:[`item.type`]="{ item }">
+              <v-chip :color="red">
+                {{ item.type }}
+              </v-chip>
+            </template>
           </data-table>
         </v-card-text>
       </v-card>
@@ -23,38 +28,136 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Watch } from 'vue-property-decorator'
-import DataTable from '../components/organisms/DataTable.vue'
+  import { Component, Vue } from 'vue-property-decorator';
+  import { DataTableHeader } from 'vuetify';
+  import DataTable from '../components/organisms/DataTable.vue';
 
-@Component({
-  components: {
-    DataTable
+  @Component({
+    components: {
+      DataTable,
+    },
+  })
+  export default class Kanban extends Vue {
+    search: String = '';
+    head: DataTableHeader[] = [
+      { text: 'プロジェクト', align: 'center', value: 'project' },
+      { text: '件名', align: 'start', value: 'subject' },
+      { text: '状態', align: 'start', value: 'status' },
+      { text: '期限', align: 'start', value: 'deadLine' },
+    ];
+    tableData = [
+      {
+        id: 1,
+        type: 'プライベート',
+        subject: '友達とランチ',
+        status: '未着手',
+        deadLine: '2021/01/01',
+      },
+      {
+        id: 2,
+        type: '仕事',
+        subject: 'テスト仕様書作成',
+        status: '着手中',
+        deadLine: '2021/01/05',
+      },
+      {
+        id: 3,
+        type: '仕事',
+        subject: '人事提出物',
+        status: '未着手',
+        deadLine: '2021/01/11',
+      },
+      {
+        id: 4,
+        type: '家事',
+        subject: '風呂掃除',
+        status: '着手中',
+        deadLine: '2021/01/13',
+      },
+      {
+        id: 5,
+        type: '家事',
+        subject: '夕飯買い物',
+        status: '未着手',
+        deadLine: '2021/01/20',
+      },
+      {
+        id: 6,
+        type: 'プライベート',
+        subject: '友達とランチ',
+        status: '未着手',
+        deadLine: '2021/01/24',
+      },
+      {
+        id: 7,
+        type: '仕事',
+        subject: 'テスト仕様書作成',
+        status: '未着手',
+        deadLine: '2021/01/27',
+      },
+      {
+        id: 8,
+        type: '仕事',
+        subject: '人事提出物',
+        status: '未着手',
+        deadLine: '2021/02/01',
+      },
+      {
+        id: 9,
+        type: '家事',
+        subject: '風呂掃除',
+        status: '着手中',
+        deadLine: '2021/02/03',
+      },
+      {
+        id: 10,
+        type: '家事',
+        subject: '夕飯買い物',
+        status: '未着手',
+        deadLine: '2021/02/06',
+      },
+      {
+        id: 11,
+        type: 'プライベート',
+        subject: '友達とランチ',
+        status: '未着手',
+        deadLine: '2021/02/10',
+      },
+      {
+        id: 12,
+        type: '仕事',
+        subject: 'テスト仕様書作成',
+        status: '未着手',
+        deadLine: '2021/02/11',
+      },
+      {
+        id: 13,
+        type: '仕事',
+        subject: '人事提出物',
+        status: '着手中',
+        deadLine: '2021/02/14',
+      },
+      {
+        id: 14,
+        type: '家事',
+        subject: '風呂掃除',
+        status: '未着手',
+        deadLine: '2021/02/19',
+      },
+      {
+        id: 15,
+        type: '家事',
+        subject: '夕飯買い物',
+        status: '未着手',
+        deadLine: '2021/02/25',
+      },
+      {
+        id: 16,
+        type: '家事',
+        subject: '夕飯買い物',
+        status: '未着手',
+        deadLine: '2021/02/27',
+      },
+    ];
   }
-})
-export default class Kanban extends Vue {
-  search: String = ''
-  head = [
-    { text: 'Type', align: 'start', value: 'type' },
-    { text: 'Subject', align: 'start', value: 'subject' },
-    { text: 'Status', align: 'start', value: 'status' }
-  ]
-
-  tableData = [
-    { id: 1, type: 'プライベート', subject: '友達とランチ', status: '未着手' },
-    { id: 2, type: '仕事', subject: 'テスト仕様書作成', status: '着手中' },
-    { id: 3, type: '仕事', subject: '人事提出物', status: '未着手' },
-    { id: 4, type: '家事', subject: '風呂掃除', status: '着手中' },
-    { id: 5, type: '家事', subject: '夕飯買い物', status: '未着手' },
-    { id: 6, type: 'プライベート', subject: '友達とランチ', status: '未着手' },
-    { id: 7, type: '仕事', subject: 'テスト仕様書作成', status: '未着手' },
-    { id: 8, type: '仕事', subject: '人事提出物', status: '未着手' },
-    { id: 9, type: '家事', subject: '風呂掃除', status: '着手中' },
-    { id: 10, type: '家事', subject: '夕飯買い物', status: '未着手' },
-    { id: 11, type: 'プライベート', subject: '友達とランチ', status: '未着手' },
-    { id: 12, type: '仕事', subject: 'テスト仕様書作成', status: '未着手' },
-    { id: 13, type: '仕事', subject: '人事提出物', status: '着手中' },
-    { id: 14, type: '家事', subject: '風呂掃除', status: '未着手' },
-    { id: 15, type: '家事', subject: '夕飯買い物', status: '未着手' }
-  ]
-}
 </script>

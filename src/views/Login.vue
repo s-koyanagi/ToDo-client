@@ -59,46 +59,46 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Watch } from 'vue-property-decorator'
-import LoginForm from '../models/form/loginForm'
-import { loginUser } from '@/store/modules/loginUser'
+  import { Component, Vue } from 'vue-property-decorator';
+  import LoginForm from '../models/form/loginForm';
+  import { loginUser } from '@/store/modules/loginUser';
 
-@Component
-export default class Login extends Vue {
-  // フォーム
-  email: string = ''
-  password: string = ''
+  @Component
+  export default class Login extends Vue {
+    // フォーム
+    email: string = '';
+    password: string = '';
 
-  // バリデーション
-  private required: Array<(v: string) => void> = []
-  validationMessage: string = ''
+    // バリデーション
+    private required: Array<(v: string) => void> = [];
+    validationMessage: string = '';
 
-  // バリデーションメッセージ表示フラグ
-  isVisible: boolean = false
+    // バリデーションメッセージ表示フラグ
+    isVisible: boolean = false;
 
-  // ログインボタン押下
-  async submit() {
-    this.required = [(v: string) => !!v || '']
-    const isInputError: boolean = (this.$refs.loginForm as Vue & {
-      validate: () => boolean
-    }).validate()
-    if (isInputError) {
-      //Submit処理
-      await loginUser.login(new LoginForm(this.email, this.password))
-      if (!loginUser.getIsAuthenticated) {
-        this.validationMessage = 'IDまたはパスワードが違います。'
-        this.isVisible = true
+    // ログインボタン押下
+    async submit() {
+      this.required = [(v: string) => !!v || ''];
+      const isInputError: boolean = (this.$refs.loginForm as Vue & {
+        validate: () => boolean;
+      }).validate();
+      if (isInputError) {
+        //Submit処理
+        await loginUser.login(new LoginForm(this.email, this.password));
+        if (!loginUser.getIsAuthenticated) {
+          this.validationMessage = 'IDまたはパスワードが違います。';
+          this.isVisible = true;
+        }
+      } else {
+        this.validationMessage = 'IDとPasswordは入力必須です。';
+        this.isVisible = true;
       }
-    } else {
-      this.validationMessage = 'IDとPasswordは入力必須です。'
-      this.isVisible = true
     }
   }
-}
 </script>
 <style lang="stylus" scoped>
-.login-form {
-  margin-left: 40px
-  margin-right: 40px
-}
+  .login-form {
+    margin-left: 40px
+    margin-right: 40px
+  }
 </style>

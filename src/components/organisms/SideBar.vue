@@ -27,7 +27,7 @@
   </v-navigation-drawer>
 </template>
 <script lang="ts">
-import { Component, Vue, Watch } from 'vue-property-decorator'
-@Component
-export default class SideBar extends Vue {}
+  import { Component, Vue } from 'vue-property-decorator';
+  @Component
+  export default class SideBar extends Vue {}
 </script>

@@ -11,15 +11,15 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
-import TopBar from './components/organisms/TopBar.vue'
-import SideBar from './components/organisms/SideBar.vue'
+  import { Component, Vue } from 'vue-property-decorator';
+  import TopBar from './components/organisms/TopBar.vue';
+  import SideBar from './components/organisms/SideBar.vue';
 
-@Component({
-  components: {
-    TopBar,
-    SideBar
-  }
-})
-export default class App extends Vue {}
+  @Component({
+    components: {
+      TopBar,
+      SideBar,
+    },
+  })
+  export default class App extends Vue {}
 </script>

@@ -18,21 +18,29 @@
       :headers="header"
       :items="data"
       :search="search"
-    ></v-data-table>
+      :footer-props="{ disableItemsPerPage: true }"
+    >
+      <template
+        v-for="(slotContent, slotName) of $scopedSlots"
+        #[slotName]="item"
+      >
+        <slot :name="slotName" v-bind="item"></slot>
+      </template>
+    </v-data-table>
   </v-sheet>
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator'
+  import { Component, Vue, Prop } from 'vue-property-decorator';
 
-@Component
-export default class DataTable extends Vue {
-  @Prop()
-  private header!: object[]
-  @Prop()
-  private data!: object[]
-  @Prop()
-  private useSearch!: boolean
-  search: string = ''
-}
+  @Component
+  export default class DataTable extends Vue {
+    @Prop()
+    private header!: object[];
+    @Prop()
+    private data!: object[];
+    @Prop()
+    private useSearch!: boolean;
+    search: string = '';
+  }
 </script>

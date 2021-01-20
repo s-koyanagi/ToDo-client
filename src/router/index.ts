@@ -1,52 +1,52 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Login from '../views/Login.vue'
-import Home from '../views/Home.vue'
-import Kanban from '../views/Kanban.vue'
-import { loginUser } from '@/store/modules/loginUser'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import Login from '../views/Login.vue';
+import Home from '../views/Home.vue';
+import Kanban from '../views/Kanban.vue';
+import { loginUser } from '@/store/modules/loginUser';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
     path: '/',
     name: 'login',
-    component: Login
+    component: Login,
   },
   {
     path: '/home',
     name: 'home',
     component: Home,
     meta: {
-      requiresAuth: true
-    }
+      requiresAuth: true,
+    },
   },
   {
     path: '/kanban',
     name: 'kanban',
     component: Kanban,
     meta: {
-      requiresAuth: true
-    }
-  }
-]
+      requiresAuth: true,
+    },
+  },
+];
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (loginUser.getIsAuthenticated) {
-      next()
+      next();
     } else {
-      next({ path: '/' })
+      next({ path: '/' });
     }
   } else {
-    next()
+    next();
   }
-})
+});
 
-export default router
+export default router;
