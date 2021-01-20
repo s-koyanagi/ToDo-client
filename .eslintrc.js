@@ -5,22 +5,16 @@ module.exports = {
   },
   extends: [
     'plugin:vue/essential',
-    '@vue/prettier',
     '@vue/typescript',
-    'prettier'
+    '@vue/prettier',
+    '@vue/prettier/@typescript-eslint'
   ],
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'prettier/prettier': [
-      'error',
-      {
-        singleQuote: true,
-        semi: false
-      }
-    ]
+    "no-unused-vars": "off"
   },
   parserOptions: {
-    parser: '@typescript-eslint/parser'
-  }
-}
+    ecmaVersion: 2020
+  },
+};
