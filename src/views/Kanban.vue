@@ -4,10 +4,12 @@
       <v-card class="grey lighten-3" min-height="800" outlined tile>
         <v-list class="grey lighten-3" shaped>
           <v-subheader>プロジェクト</v-subheader>
-          <v-list-item-group v-model="selectedItem" color="primary">
+          <v-list-item-group v-model="selectedItem">
             <v-list-item v-for="(item, i) in filters" :key="i">
               <v-list-item-icon>
-                <v-icon v-text="item.icon"></v-icon>
+                <v-icon v-bind:color="item.color" size="15"
+                  >mdi-checkbox-blank-circle</v-icon
+                >
               </v-list-item-icon>
               <v-list-item-content>
                 <v-list-item-title v-text="item.text"></v-list-item-title>
@@ -177,9 +179,9 @@
       },
     ];
     filters: object[] = [
-      { text: 'Real-Time', icon: 'mdi-clock' },
-      { text: 'Audience', icon: 'mdi-account' },
-      { text: 'Conversions', icon: 'mdi-flag' },
+      { text: 'プライベート', color: 'red' },
+      { text: '仕事', color: 'blue' },
+      { text: '家事', color: 'yellow' },
     ];
   }
 </script>
