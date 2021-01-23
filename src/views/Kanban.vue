@@ -30,8 +30,13 @@
             :useSearch="true"
           >
             <template v-slot:[`item.project`]="{ item }">
-              <v-chip color="primary" class="mr-3">
-                {{ item.project }}
+              <v-chip id="pj_chip" color="primary" class="mr-3">
+                <div
+                  style="text-overflow: ellipsis;    white-space: nowrap;
+    overflow: hidden;"
+                >
+                  {{ item.project }}
+                </div>
               </v-chip>
             </template>
             <template v-slot:[`item.status`]="{ item }">
@@ -185,3 +190,9 @@
     ];
   }
 </script>
+
+<style>
+  #pj_chip {
+    width: 70px;
+  }
+</style>
