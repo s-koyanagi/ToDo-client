@@ -30,13 +30,10 @@
             :useSearch="true"
           >
             <template v-slot:[`item.project`]="{ item }">
-              <v-chip id="pj_chip" color="primary" class="mr-3">
-                <div
-                  style="text-overflow: ellipsis;    white-space: nowrap;
-    overflow: hidden;"
-                >
+              <v-chip color="primary" class="mr-5 chip_width">
+                <span class="chip_text">
                   {{ item.project }}
-                </div>
+                </span>
               </v-chip>
             </template>
             <template v-slot:[`item.status`]="{ item }">
@@ -64,7 +61,7 @@
   export default class Kanban extends Vue {
     search: String = '';
     head: DataTableHeader[] = [
-      { text: 'プロジェクト', align: 'center', value: 'project', width: '150' },
+      { text: 'プロジェクト', align: 'center', value: 'project', width: '100' },
       { text: '件名', align: 'start', value: 'subject', width: '500' },
       { text: '状態', align: 'center', value: 'status', width: '100' },
       { text: '期限', align: 'center', value: 'deadLine', width: '150' },
@@ -192,7 +189,13 @@
 </script>
 
 <style>
-  #pj_chip {
-    width: 70px;
+  .chip_width {
+    width: 75px;
+    justify-content: center;
+  }
+  .chip_text {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
 </style>
