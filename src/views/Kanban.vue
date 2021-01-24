@@ -37,8 +37,10 @@
               </v-chip>
             </template>
             <template v-slot:[`item.status`]="{ item }">
-              <v-chip color="red" class="mr-3">
-                {{ item.status }}
+              <v-chip color="red" class="mr-5 chip_width">
+                <span class="chip_text">
+                  {{ item.status }}
+                </span>
               </v-chip>
             </template>
           </data-table>
@@ -66,7 +68,7 @@
       { text: '状態', align: 'center', value: 'status', width: '100' },
       { text: '期限', align: 'center', value: 'deadLine', width: '150' },
     ];
-    tableData = [
+    tableData: object[] = [
       {
         id: 1,
         project: 'プライベート',
