@@ -5,14 +5,16 @@
         <v-list class="grey lighten-3" shaped>
           <v-subheader>プロジェクト</v-subheader>
           <v-list-item-group v-model="selectedItem">
-            <v-list-item v-for="(item, i) in filters" :key="i">
+            <v-list-item v-for="(item, i) in projectData" :key="i">
               <v-list-item-icon>
                 <v-icon v-bind:color="item.color" size="15"
                   >mdi-checkbox-blank-circle</v-icon
                 >
               </v-list-item-icon>
               <v-list-item-content>
-                <v-list-item-title v-text="item.text"></v-list-item-title>
+                <v-list-item-title
+                  v-text="item.projectName"
+                ></v-list-item-title>
               </v-list-item-content>
             </v-list-item>
           </v-list-item-group>
@@ -25,14 +27,17 @@
         <v-card-text>
           <data-table
             class="ma-5"
-            :data="tableData"
-            :header="head"
+            :data="taskData"
+            :header="header"
             :useSearch="true"
           >
-            <template v-slot:[`item.project`]="{ item }">
-              <v-chip color="primary" class="mr-5 chip_width">
+            <template v-slot:[`item.projectId`]="{ item }">
+              <v-chip
+                v-bind:color="getProjectColor(item.projectId)"
+                class="mr-5 chip_width"
+              >
                 <span class="chip_text">
-                  {{ item.project }}
+                  {{ item.projectId }}
                 </span>
               </v-chip>
             </template>
@@ -62,131 +67,118 @@
   })
   export default class Kanban extends Vue {
     search: String = '';
-    head: DataTableHeader[] = [
-      { text: 'プロジェクト', align: 'center', value: 'project', width: '100' },
+    header: DataTableHeader[] = [
+      {
+        text: 'プロジェクト',
+        align: 'center',
+        value: 'projectId',
+        width: '100',
+      },
       { text: '件名', align: 'start', value: 'subject', width: '500' },
       { text: '状態', align: 'center', value: 'status', width: '100' },
       { text: '期限', align: 'center', value: 'deadLine', width: '150' },
     ];
-    tableData: object[] = [
+    taskData: object[] = [
       {
-        id: 1,
-        project: 'プライベート',
+        taskid: 1,
+        projectId: 1,
         subject: '友達とランチ',
         status: '未着手',
         deadLine: '2021/01/01',
       },
       {
-        id: 2,
-        project: '仕事',
+        taskid: 2,
+        projectId: 2,
         subject: 'テスト仕様書作成',
         status: '着手中',
         deadLine: '2021/01/05',
       },
       {
-        id: 3,
-        project: '仕事',
+        taskid: 3,
+        projectId: 2,
         subject: '人事提出物',
         status: '未着手',
         deadLine: '2021/01/11',
       },
       {
-        id: 4,
-        project: '家事',
+        taskid: 4,
+        projectId: 3,
         subject: '風呂掃除',
         status: '着手中',
         deadLine: '2021/01/13',
       },
       {
-        id: 5,
-        project: '家事',
+        taskid: 5,
+        projectId: 3,
         subject: '夕飯買い物',
         status: '未着手',
         deadLine: '2021/01/20',
       },
       {
-        id: 6,
-        project: 'プライベート',
+        taskid: 6,
+        projectId: 1,
         subject: '友達とランチ',
         status: '未着手',
         deadLine: '2021/01/24',
       },
       {
-        id: 7,
-        project: '仕事',
+        taskid: 7,
+        projectId: 2,
         subject: 'テスト仕様書作成',
         status: '未着手',
         deadLine: '2021/01/27',
       },
       {
-        id: 8,
-        project: '仕事',
+        taskid: 8,
+        projectId: 2,
         subject: '人事提出物',
         status: '未着手',
         deadLine: '2021/02/01',
       },
       {
-        id: 9,
-        project: '家事',
+        taskid: 9,
+        projectId: 3,
         subject: '風呂掃除',
         status: '着手中',
         deadLine: '2021/02/03',
       },
       {
-        id: 10,
-        project: '家事',
+        taskid: 10,
+        projectId: 3,
         subject: '夕飯買い物',
         status: '未着手',
         deadLine: '2021/02/06',
       },
       {
-        id: 11,
-        project: 'プライベート',
+        taskid: 11,
+        projectId: 1,
         subject: '友達とランチ',
         status: '未着手',
         deadLine: '2021/02/10',
       },
       {
-        id: 12,
-        project: '仕事',
+        taskid: 12,
+        projectId: 3,
         subject: 'テスト仕様書作成',
         status: '未着手',
         deadLine: '2021/02/11',
       },
-      {
-        id: 13,
-        project: '仕事',
-        subject: '人事提出物',
-        status: '着手中',
-        deadLine: '2021/02/14',
-      },
-      {
-        id: 14,
-        project: '家事',
-        subject: '風呂掃除',
-        status: '未着手',
-        deadLine: '2021/02/19',
-      },
-      {
-        id: 15,
-        project: '家事',
-        subject: '夕飯買い物',
-        status: '未着手',
-        deadLine: '2021/02/25',
-      },
-      {
-        id: 16,
-        project: '家事',
-        subject: '夕飯買い物',
-        status: '未着手',
-        deadLine: '2021/02/27',
-      },
     ];
-    filters: object[] = [
-      { text: 'プライベート', color: 'red' },
-      { text: '仕事', color: 'blue' },
-      { text: '家事', color: 'yellow' },
+    projectData: any[] = [
+      { projectId: 1, projectName: 'プライベート', color: '#A5D6A7' },
+      { projectId: 2, projectName: '仕事', color: '#FFCC80' },
+      { projectId: 3, projectName: '家事', color: '#84FFFF' },
     ];
+
+    getProjectColor(id: any): any {
+      if (id == 1) {
+        return '#A5D6A7';
+      } else if (id == 2) {
+        return '#FFCC80';
+      } else {
+        return '#84FFFF';
+      }
+    }
   }
 </script>
 
