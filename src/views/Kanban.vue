@@ -33,11 +33,11 @@
           >
             <template v-slot:[`item.projectId`]="{ item }">
               <v-chip
-                v-bind:color="getProjectColor(item.projectId)"
+                v-bind:color="getProjectProperty(item.projectId, 'color')"
                 class="mr-5 chip_width"
               >
                 <span class="chip_text">
-                  {{ item.projectId }}
+                  {{ getProjectProperty(item.projectId, 'projectName') }}
                 </span>
               </v-chip>
             </template>
@@ -170,14 +170,11 @@
       { projectId: 3, projectName: '家事', color: '#84FFFF' },
     ];
 
-    getProjectColor(id: any): any {
-      if (id == 1) {
-        return '#A5D6A7';
-      } else if (id == 2) {
-        return '#FFCC80';
-      } else {
-        return '#84FFFF';
-      }
+    getProjectProperty(id: any, targetProperty: string): any {
+      let property: string = this.projectData.find(v => v.projectId == id)[
+        targetProperty
+      ];
+      return property;
     }
   }
 </script>
