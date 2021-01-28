@@ -58,6 +58,7 @@
 <script lang="ts">
   import { Component, Vue } from 'vue-property-decorator';
   import { DataTableHeader } from 'vuetify';
+  import { ProjectData, TaskData } from '../types/types';
   import DataTable from '../components/organisms/DataTable.vue';
 
   @Component({
@@ -78,103 +79,109 @@
       { text: '状態', align: 'center', value: 'status', width: '100' },
       { text: '期限', align: 'center', value: 'deadLine', width: '150' },
     ];
-    taskData: object[] = [
+    taskData: TaskData[] = [
       {
         taskid: 1,
         projectId: 1,
         subject: '友達とランチ',
-        status: '未着手',
+        statusId: 1,
         deadLine: '2021/01/01',
       },
       {
         taskid: 2,
         projectId: 2,
         subject: 'テスト仕様書作成',
-        status: '着手中',
+        statusId: 2,
         deadLine: '2021/01/05',
       },
       {
         taskid: 3,
         projectId: 2,
         subject: '人事提出物',
-        status: '未着手',
+        statusId: 1,
         deadLine: '2021/01/11',
       },
       {
         taskid: 4,
         projectId: 3,
         subject: '風呂掃除',
-        status: '着手中',
+        statusId: 2,
         deadLine: '2021/01/13',
       },
       {
         taskid: 5,
         projectId: 3,
         subject: '夕飯買い物',
-        status: '未着手',
+        statusId: 1,
         deadLine: '2021/01/20',
       },
       {
         taskid: 6,
         projectId: 1,
         subject: '友達とランチ',
-        status: '未着手',
+        statusId: 1,
         deadLine: '2021/01/24',
       },
       {
         taskid: 7,
         projectId: 2,
         subject: 'テスト仕様書作成',
-        status: '未着手',
+        statusId: 1,
         deadLine: '2021/01/27',
       },
       {
         taskid: 8,
         projectId: 2,
         subject: '人事提出物',
-        status: '未着手',
+        statusId: 1,
         deadLine: '2021/02/01',
       },
       {
         taskid: 9,
         projectId: 3,
         subject: '風呂掃除',
-        status: '着手中',
+        statusId: 2,
         deadLine: '2021/02/03',
       },
       {
         taskid: 10,
         projectId: 3,
         subject: '夕飯買い物',
-        status: '未着手',
+        statusId: 1,
         deadLine: '2021/02/06',
       },
       {
         taskid: 11,
         projectId: 1,
         subject: '友達とランチ',
-        status: '未着手',
+        statusId: 1,
         deadLine: '2021/02/10',
       },
       {
         taskid: 12,
         projectId: 3,
         subject: 'テスト仕様書作成',
-        status: '未着手',
+        statusId: 1,
         deadLine: '2021/02/11',
       },
     ];
-    projectData: any[] = [
+    projectData: ProjectData[] = [
       { projectId: 1, projectName: 'プライベート', color: '#A5D6A7' },
       { projectId: 2, projectName: '仕事', color: '#FFCC80' },
       { projectId: 3, projectName: '家事', color: '#84FFFF' },
     ];
 
-    getProjectProperty(id: any, targetProperty: string): any {
-      let property: string = this.projectData.find(v => v.projectId == id)[
-        targetProperty
-      ];
-      return property;
+    getProjectProperty(
+      id: number,
+      targetProperty: keyof ProjectData
+    ): string | number | undefined {
+      let property: ProjectData | undefined = this.projectData.find(
+        v => v.projectId == id
+      );
+      if (property === undefined) {
+        property = { projectId: 0, projectName: 'Not Data', color: '#FFFFFF' };
+      }
+      return property[targetProperty];
     }
   }
 </script>
