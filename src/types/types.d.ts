@@ -1,7 +1,7 @@
 export interface ProjectData {
-  projectId?: number;
-  projectName?: string;
-  color?: string;
+  projectId: number;
+  projectName: string;
+  color: string;
 }
 
 export interface TaskData {
@@ -9,5 +9,5 @@ export interface TaskData {
   projectId: number;
   subject: string;
   statusId: number;
-  deadLine: Date;
+  deadLine: string;
 }
