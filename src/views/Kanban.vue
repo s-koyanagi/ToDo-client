@@ -41,10 +41,13 @@
                 </span>
               </v-chip>
             </template>
-            <template v-slot:[`item.status`]="{ item }">
-              <v-chip color="red" class="mr-5 chip_width">
+            <template v-slot:[`item.statusId`]="{ item }">
+              <v-chip
+                v-bind:color="getStatusProperty(item.statusId, 'color')"
+                class="mr-5 chip_width"
+              >
                 <span class="chip_text">
-                  {{ item.status }}
+                  {{ getStatusProperty(item.statusId, 'statusName') }}
                 </span>
               </v-chip>
             </template>
@@ -58,7 +61,7 @@
 <script lang="ts">
   import { Component, Vue } from 'vue-property-decorator';
   import { DataTableHeader } from 'vuetify';
-  import { ProjectData, TaskData } from '../types/types';
+  import { ProjectData, TaskData, StatusData } from '../types/types';
   import DataTable from '../components/organisms/DataTable.vue';
 
   @Component({
@@ -76,7 +79,7 @@
         width: '100',
       },
       { text: '件名', align: 'start', value: 'subject', width: '500' },
-      { text: '状態', align: 'center', value: 'status', width: '100' },
+      { text: '状態', align: 'center', value: 'statusId', width: '100' },
       { text: '期限', align: 'center', value: 'deadLine', width: '150' },
     ];
     taskData: TaskData[] = [
@@ -170,6 +173,11 @@
       { projectId: 2, projectName: '仕事', color: '#FFCC80' },
       { projectId: 3, projectName: '家事', color: '#84FFFF' },
     ];
+    statusData: StatusData[] = [
+      { statusId: 1, statusName: '未着手', color: '#EF9A9A' },
+      { statusId: 2, statusName: '着手中', color: '#90CAF9' },
+      { statusId: 3, statusName: '完了', color: '#DCE775' },
+    ];
 
     getProjectProperty(
       id: number,
@@ -180,6 +188,19 @@
       );
       if (property === undefined) {
         property = { projectId: 0, projectName: 'Not Data', color: '#FFFFFF' };
+      }
+      return property[targetProperty];
+    }
+
+    getStatusProperty(
+      id: number,
+      targetProperty: keyof StatusData
+    ): string | number | undefined {
+      let property: StatusData | undefined = this.statusData.find(
+        v => v.statusId == id
+      );
+      if (property === undefined) {
+        property = { statusId: 0, statusName: 'Not Data', color: '#FFFFFF' };
       }
       return property[targetProperty];
     }
