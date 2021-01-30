@@ -39,12 +39,24 @@ class LoginUser extends VuexModule {
     formData.append('email', loginForm.id);
     formData.append('password', loginForm.password);
     await axios
-      .post('/login', formData, { withCredentials: true })
+      .post('/login', formData)
       .then((res: AxiosResponse) => {
         this.SET_LOGIN_USER_INFO(res.data);
         router.push({ path: '/kanban' });
       })
       .catch((error: AxiosError) => {});
+  }
+
+  @Action({ rawError: true })
+  async verifyAuthentication() {
+    await axios
+      .post('/auth/verify', { withCredentials: true })
+      .then((res: AxiosResponse) => {
+        this.SET_LOGIN_USER_INFO(res.data);
+      })
+      .catch((error: AxiosError) => {
+        this.DROP_LOGIN_USER_INFO();
+      });
   }
 
   get getUserInfo(): User {
