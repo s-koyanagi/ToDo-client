@@ -7,8 +7,9 @@ import axios from 'axios';
 import VueAxios from 'vue-axios';
 
 Vue.config.productionTip = false;
-
 Vue.use(VueAxios, axios);
+
+axios.defaults.baseURL = 'http://localhost:8080';
 
 new Vue({
   router,
