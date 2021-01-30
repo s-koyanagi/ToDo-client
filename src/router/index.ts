@@ -3,7 +3,7 @@ import VueRouter from 'vue-router';
 import Login from '../views/Login.vue';
 import Home from '../views/Home.vue';
 import Kanban from '../views/Kanban.vue';
-import { loginUser } from '@/store/modules/loginUser';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 
 Vue.use(VueRouter);
 
@@ -37,12 +37,22 @@ const router = new VueRouter({
   routes,
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
+  let isAuthenticated: boolean = false;
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (loginUser.getIsAuthenticated) {
+    await axios
+      .post('/auth/verify')
+      .then((res: AxiosResponse) => {
+        isAuthenticated = true;
+      })
+      .catch((error: AxiosError) => {});
+
+    if (isAuthenticated) {
       next();
+      console.log('success!!');
     } else {
-      next({ path: '/' });
+      router.push({ path: '/' });
+      console.log('failed!!');
     }
   } else {
     next();
