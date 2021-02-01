@@ -22,13 +22,13 @@ class LoginUser extends VuexModule {
   private isAuthenticated: boolean = false;
 
   @Mutation
-  public SET_LOGIN_USER_INFO(user: User) {
+  private SET_LOGIN_USER_INFO(user: User) {
     this.isAuthenticated = true;
     this.user = user;
   }
 
   @Mutation
-  public DROP_LOGIN_USER_INFO() {
+  private DROP_LOGIN_USER_INFO() {
     this.isAuthenticated = false;
     this.user = new User();
   }
@@ -50,13 +50,24 @@ class LoginUser extends VuexModule {
   @Action({ rawError: true })
   async verifyAuthentication() {
     await axios
-      .post('/auth/verify', { withCredentials: true })
+      .post('/auth/verify')
       .then((res: AxiosResponse) => {
         this.SET_LOGIN_USER_INFO(res.data);
       })
       .catch((error: AxiosError) => {
         this.DROP_LOGIN_USER_INFO();
       });
+  }
+
+  @Action({ rawError: true })
+  async logout() {
+    await axios
+      .post('/logout')
+      .then((res: AxiosResponse) => {
+        this.DROP_LOGIN_USER_INFO();
+        router.push({ path: '/' });
+      })
+      .catch((error: AxiosError) => {});
   }
 
   get getUserInfo(): User {
