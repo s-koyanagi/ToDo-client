@@ -63,6 +63,7 @@
   import { DataTableHeader } from 'vuetify';
   import { ProjectData, TaskData, StatusData } from '../types/types';
   import DataTable from '../components/organisms/DataTable.vue';
+  import { taskStore } from '@/store/modules/task';
 
   @Component({
     components: {
@@ -178,6 +179,11 @@
       { statusId: 2, statusName: '着手中', color: '#90CAF9' },
       { statusId: 3, statusName: '完了', color: '#DCE775' },
     ];
+
+    async created() {
+      await taskStore.getTaskList();
+      this.taskData = taskStore.GET_TASK_LIST;
+    }
 
     getProjectProperty(
       id: number,
