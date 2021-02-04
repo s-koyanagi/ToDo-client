@@ -70,11 +70,11 @@ class LoginUser extends VuexModule {
       .catch((error: AxiosError) => {});
   }
 
-  get getUserInfo(): User {
+  get GET_USER_INFO(): User {
     return this.user;
   }
 
-  get getIsAuthenticated(): boolean {
+  get GET_IS_AUTHENTICATED(): boolean {
     return this.isAuthenticated;
   }
 }

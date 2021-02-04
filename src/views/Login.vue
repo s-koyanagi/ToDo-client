@@ -85,7 +85,7 @@
       if (isInputError) {
         //Submit処理
         await loginUser.login(new LoginForm(this.email, this.password));
-        if (!loginUser.getIsAuthenticated) {
+        if (!loginUser.GET_IS_AUTHENTICATED) {
           this.validationMessage = 'IDまたはパスワードが違います。';
           this.isVisible = true;
         }

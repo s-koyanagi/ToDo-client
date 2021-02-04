@@ -40,12 +40,10 @@ const router = new VueRouter({
 router.beforeEach(async (to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     await loginUser.verifyAuthentication();
-    if (loginUser.getIsAuthenticated) {
+    if (loginUser.GET_IS_AUTHENTICATED) {
       next();
-      console.log('success!!');
     } else {
       router.push({ path: '/' });
-      console.log('failed!!');
     }
   } else {
     next();
