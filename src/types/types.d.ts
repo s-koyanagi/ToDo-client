@@ -5,7 +5,7 @@ export interface ProjectData {
 }
 
 export interface TaskData {
-  taskid?: number;
+  taskId?: number;
   projectId?: number;
   subject?: string;
   statusId?: number;
