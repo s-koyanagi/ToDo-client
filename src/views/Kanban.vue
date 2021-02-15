@@ -4,7 +4,7 @@
       <v-card class="grey lighten-3" min-height="800" outlined tile>
         <v-list class="grey lighten-3" shaped>
           <v-subheader>プロジェクト</v-subheader>
-          <v-list-item-group v-model="selectedItem">
+          <v-list-item-group>
             <v-list-item v-for="(item, i) in projectData" :key="i">
               <v-list-item-icon>
                 <v-icon v-bind:color="item.color" size="15"
@@ -83,92 +83,7 @@
       { text: '状態', align: 'center', value: 'statusId', width: '100' },
       { text: '期限', align: 'center', value: 'deadLine', width: '150' },
     ];
-    taskData: TaskData[] = [
-      {
-        taskId: 1,
-        projectId: 1,
-        subject: '友達とランチ',
-        statusId: 1,
-        deadLine: '2021/01/01',
-      },
-      {
-        taskId: 2,
-        projectId: 2,
-        subject: 'テスト仕様書作成',
-        statusId: 2,
-        deadLine: '2021/01/05',
-      },
-      {
-        taskId: 3,
-        projectId: 2,
-        subject: '人事提出物',
-        statusId: 1,
-        deadLine: '2021/01/11',
-      },
-      {
-        taskId: 4,
-        projectId: 3,
-        subject: '風呂掃除',
-        statusId: 2,
-        deadLine: '2021/01/13',
-      },
-      {
-        taskId: 5,
-        projectId: 3,
-        subject: '夕飯買い物',
-        statusId: 1,
-        deadLine: '2021/01/20',
-      },
-      {
-        taskId: 6,
-        projectId: 1,
-        subject: '友達とランチ',
-        statusId: 1,
-        deadLine: '2021/01/24',
-      },
-      {
-        taskId: 7,
-        projectId: 2,
-        subject: 'テスト仕様書作成',
-        statusId: 1,
-        deadLine: '2021/01/27',
-      },
-      {
-        taskId: 8,
-        projectId: 2,
-        subject: '人事提出物',
-        statusId: 1,
-        deadLine: '2021/02/01',
-      },
-      {
-        taskId: 9,
-        projectId: 3,
-        subject: '風呂掃除',
-        statusId: 2,
-        deadLine: '2021/02/03',
-      },
-      {
-        taskId: 10,
-        projectId: 3,
-        subject: '夕飯買い物',
-        statusId: 1,
-        deadLine: '2021/02/06',
-      },
-      {
-        taskId: 11,
-        projectId: 1,
-        subject: '友達とランチ',
-        statusId: 1,
-        deadLine: '2021/02/10',
-      },
-      {
-        taskId: 12,
-        projectId: 3,
-        subject: 'テスト仕様書作成',
-        statusId: 1,
-        deadLine: '2021/02/11',
-      },
-    ];
+    taskData: TaskData[] = [];
     projectData: ProjectData[] = [
       { projectId: 1, projectName: 'プライベート', color: '#A5D6A7' },
       { projectId: 2, projectName: '仕事', color: '#FFCC80' },
@@ -209,6 +124,10 @@
         property = { statusId: 0, statusName: 'Not Data', color: '#FFFFFF' };
       }
       return property[targetProperty];
+    }
+
+    tmp() {
+      alert('aaa');
     }
   }
 </script>
