@@ -5,7 +5,11 @@
         <v-list class="grey lighten-3" shaped>
           <v-subheader>プロジェクト</v-subheader>
           <v-list-item-group>
-            <v-list-item v-for="(item, i) in projectData" :key="i">
+            <v-list-item
+              v-for="(item, i) in projectData"
+              :key="i"
+              @click="filterByProject(item.projectId)"
+            >
               <v-list-item-icon>
                 <v-icon v-bind:color="item.color" size="15"
                   >mdi-checkbox-blank-circle</v-icon
@@ -72,6 +76,8 @@
   })
   export default class Kanban extends Vue {
     search: String = '';
+    selectedProject: String = '';
+    taskData: TaskData[] = [];
     header: DataTableHeader[] = [
       {
         text: 'プロジェクト',
@@ -83,7 +89,6 @@
       { text: '状態', align: 'center', value: 'statusId', width: '100' },
       { text: '期限', align: 'center', value: 'deadLine', width: '150' },
     ];
-    taskData: TaskData[] = [];
     projectData: ProjectData[] = [
       { projectId: 1, projectName: 'プライベート', color: '#A5D6A7' },
       { projectId: 2, projectName: '仕事', color: '#FFCC80' },
@@ -126,8 +131,10 @@
       return property[targetProperty];
     }
 
-    tmp() {
-      alert('aaa');
+    filterByProject(projectId: number) {
+      this.taskData = taskStore.GET_TASK_LIST.filter(
+        v => v.projectId == projectId
+      );
     }
   }
 </script>
