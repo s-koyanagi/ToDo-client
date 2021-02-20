@@ -89,11 +89,7 @@
       { text: '状態', align: 'center', value: 'statusId', width: '100' },
       { text: '期限', align: 'center', value: 'deadLine', width: '150' },
     ];
-    projectData: ProjectData[] = [
-      { projectId: 1, projectName: 'プライベート', color: '#A5D6A7' },
-      { projectId: 2, projectName: '仕事', color: '#FFCC80' },
-      { projectId: 3, projectName: '家事', color: '#84FFFF' },
-    ];
+    projectData: ProjectData[] = [];
     statusData: StatusData[] = [
       { statusId: 1, statusName: '未着手', color: '#EF9A9A' },
       { statusId: 2, statusName: '着手中', color: '#90CAF9' },
