@@ -68,6 +68,8 @@
   import { ProjectData, TaskData, StatusData } from '../types/types';
   import DataTable from '../components/organisms/DataTable.vue';
   import { taskStore } from '@/store/modules/task';
+  import { projectStore } from '@/store/modules/project';
+  import axios, { AxiosError, AxiosResponse } from 'axios';
 
   @Component({
     components: {
@@ -97,8 +99,16 @@
     ];
 
     async created() {
-      await taskStore.getTaskList();
+      await axios
+        .post('/init/get-data')
+        .then((res: AxiosResponse) => {
+          projectStore.setProjectData(res.data.projectData);
+          taskStore.setTaskList(res.data.taskData);
+        })
+        .catch((err: AxiosError) => {});
+
       this.taskData = taskStore.GET_TASK_LIST;
+      this.projectData = projectStore.GET_PROJECT_DATA;
     }
 
     getProjectProperty(
