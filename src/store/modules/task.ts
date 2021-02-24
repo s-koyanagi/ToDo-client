@@ -43,6 +43,11 @@ class Task extends VuexModule {
     }
   }
 
+  @Action({ rawError: true })
+  async setTaskList(taskList: TaskData[]) {
+    this.SET_TASK_LIST(taskList);
+  }
+
   get GET_TASK_LIST(): TaskData[] {
     return this.taskList;
   }
