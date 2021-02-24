@@ -1,4 +1,10 @@
-import { Module, VuexModule, Mutation, Action } from 'vuex-module-decorators';
+import {
+  Module,
+  VuexModule,
+  Mutation,
+  Action,
+  getModule,
+} from 'vuex-module-decorators';
 
 import store from '../index';
 import { ProjectData } from '@/types/types';
@@ -26,3 +32,4 @@ class Project extends VuexModule {
     return this.projects;
   }
 }
+export const projectStore = getModule(Project);
