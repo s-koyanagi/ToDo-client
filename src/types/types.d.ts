@@ -1,10 +1,10 @@
-export interface ProjectData {
+export class ProjectData {
   projectId?: number;
   projectName?: string;
   color?: string;
 }
 
-export interface TaskData {
+export class TaskData {
   taskId?: number;
   projectId?: number;
   subject?: string;
@@ -12,7 +12,7 @@ export interface TaskData {
   deadLine?: string;
 }
 
-export interface StatusData {
+export class StatusData {
   statusId?: number;
   statusName?: string;
   color?: string;
