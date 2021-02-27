@@ -32,4 +32,4 @@ class Status extends VuexModule {
     return this.status;
   }
 }
-export const projectStore = getModule(Status);
+export const statusStore = getModule(Status);
