@@ -69,6 +69,7 @@
   import DataTable from '../components/organisms/DataTable.vue';
   import { taskStore } from '@/store/modules/task';
   import { projectStore } from '@/store/modules/project';
+  import { statusStore } from '@/store/modules/status';
   import axios, { AxiosError, AxiosResponse } from 'axios';
 
   @Component({
@@ -92,23 +93,21 @@
       { text: '期限', align: 'center', value: 'deadLine', width: '150' },
     ];
     projectData: ProjectData[] = [];
-    statusData: StatusData[] = [
-      { statusId: 1, statusName: '未着手', color: '#EF9A9A' },
-      { statusId: 2, statusName: '着手中', color: '#90CAF9' },
-      { statusId: 3, statusName: '完了', color: '#DCE775' },
-    ];
+    statusData: StatusData[] = [];
 
     async created() {
       await axios
-        .post('/init/get-data')
+        .post('/kanban/get-data')
         .then((res: AxiosResponse) => {
           projectStore.setProjectData(res.data.projectData);
           taskStore.setTaskList(res.data.taskData);
+          statusStore.setStatusData(res.data.statusData);
         })
         .catch((err: AxiosError) => {});
 
       this.taskData = taskStore.GET_TASK_LIST;
       this.projectData = projectStore.GET_PROJECT_DATA;
+      this.statusData = statusStore.GET_STATUS_DATA;
     }
 
     getProjectProperty(
