@@ -137,9 +137,13 @@
     }
 
     filterByProject(projectId: number) {
-      this.taskData = taskStore.GET_TASK_LIST.filter(
-        v => v.projectId == projectId
-      );
+      if (projectId === 0) {
+        this.taskData = taskStore.GET_TASK_LIST;
+      } else {
+        this.taskData = taskStore.GET_TASK_LIST.filter(
+          v => v.projectId == projectId
+        );
+      }
     }
   }
 </script>
