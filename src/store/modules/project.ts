@@ -21,12 +21,12 @@ class Project extends VuexModule {
   @Mutation
   private SET_PROJECT_DATA(projects: ProjectData[]) {
     this.projects = projects;
-    const allProject: ProjectData = {
+    const tmp: ProjectData = {
       projectId: 0,
       projectName: '全て',
       color: '#000000',
     };
-    this.projects.unshift(allProject);
+    this.projects.unshift(tmp);
   }
 
   @Action
