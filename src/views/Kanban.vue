@@ -3,12 +3,12 @@
     <v-col cols="2">
       <v-card class="grey lighten-3" min-height="800" outlined tile>
         <v-list class="grey lighten-3" shaped>
-          <v-subheader>プロジェクト</v-subheader>
+          <v-subheader>カテゴリー</v-subheader>
           <v-list-item-group>
             <v-list-item
-              v-for="(item, i) in projectData"
+              v-for="(item, i) in categoryData"
               :key="i"
-              @click="filterByProject(item.projectId)"
+              @click="filterByCategory(item.categoryId)"
             >
               <v-list-item-icon>
                 <v-icon v-bind:color="item.color" size="15"
@@ -17,7 +17,7 @@
               </v-list-item-icon>
               <v-list-item-content>
                 <v-list-item-title
-                  v-text="item.projectName"
+                  v-text="item.categoryName"
                 ></v-list-item-title>
               </v-list-item-content>
             </v-list-item>
@@ -35,13 +35,13 @@
             :header="header"
             :useSearch="true"
           >
-            <template v-slot:[`item.projectId`]="{ item }">
+            <template v-slot:[`item.categoryId`]="{ item }">
               <v-chip
-                v-bind:color="getProjectProperty(item.projectId, 'color')"
+                v-bind:color="getCategoryProperty(item.categoryId, 'color')"
                 class="mr-5 chip_width"
               >
                 <span class="chip_text">
-                  {{ getProjectProperty(item.projectId, 'projectName') }}
+                  {{ getCategoryProperty(item.categoryId, 'categoryName') }}
                 </span>
               </v-chip>
             </template>
@@ -65,10 +65,10 @@
 <script lang="ts">
   import { Component, Vue } from 'vue-property-decorator';
   import { DataTableHeader } from 'vuetify';
-  import { ProjectData, TaskData, StatusData } from '../types/types';
+  import { CategoryData, TaskData, StatusData } from '../types/types';
   import DataTable from '../components/organisms/DataTable.vue';
   import { taskStore } from '@/store/modules/task';
-  import { projectStore } from '@/store/modules/project';
+  import { categoryStore } from '@/store/modules/category';
   import { statusStore } from '@/store/modules/status';
   import axios, { AxiosError, AxiosResponse } from 'axios';
 
@@ -79,46 +79,50 @@
   })
   export default class Kanban extends Vue {
     search: String = '';
-    selectedProject: String = '';
+    selectedCategory: String = '';
     taskData: TaskData[] = [];
     header: DataTableHeader[] = [
       {
-        text: 'プロジェクト',
+        text: 'カテゴリー',
         align: 'center',
-        value: 'projectId',
+        value: 'categoryId',
         width: '100',
       },
       { text: '件名', align: 'start', value: 'subject', width: '500' },
       { text: '状態', align: 'center', value: 'statusId', width: '100' },
       { text: '期限', align: 'center', value: 'deadLine', width: '150' },
     ];
-    projectData: ProjectData[] = [];
+    categoryData: CategoryData[] = [];
     statusData: StatusData[] = [];
 
     async created() {
       await axios
         .post('/kanban/get-data')
         .then((res: AxiosResponse) => {
-          projectStore.setProjectData(res.data.projectData);
+          categoryStore.setCategoryData(res.data.categoryData);
           taskStore.setTaskList(res.data.taskData);
           statusStore.setStatusData(res.data.statusData);
         })
         .catch((err: AxiosError) => {});
 
       this.taskData = taskStore.GET_TASK_LIST;
-      this.projectData = projectStore.GET_PROJECT_DATA;
+      this.categoryData = categoryStore.GET_CATEGORY_DATA;
       this.statusData = statusStore.GET_STATUS_DATA;
     }
 
-    getProjectProperty(
+    getCategoryProperty(
       id: number,
-      targetProperty: keyof ProjectData
+      targetProperty: keyof CategoryData
     ): string | number | undefined {
-      let property: ProjectData | undefined = this.projectData.find(
-        v => v.projectId == id
+      let property: CategoryData | undefined = this.categoryData.find(
+        v => v.categoryId == id
       );
       if (property === undefined) {
-        property = { projectId: 0, projectName: 'Not Data', color: '#FFFFFF' };
+        property = {
+          categoryId: 0,
+          categoryName: 'Not Data',
+          color: '#FFFFFF',
+        };
       }
       return property[targetProperty];
     }
@@ -136,12 +140,12 @@
       return property[targetProperty];
     }
 
-    filterByProject(projectId: number) {
-      if (projectId === 0) {
+    filterByCategory(categoryId: number) {
+      if (categoryId === 0) {
         this.taskData = taskStore.GET_TASK_LIST;
       } else {
         this.taskData = taskStore.GET_TASK_LIST.filter(
-          v => v.projectId == projectId
+          v => v.categoryId == categoryId
         );
       }
     }

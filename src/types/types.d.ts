@@ -1,12 +1,12 @@
-export class ProjectData {
-  projectId?: number;
-  projectName?: string;
+export class CategoryData {
+  categoryId?: number;
+  categoryName?: string;
   color?: string;
 }
 
 export class TaskData {
   taskId?: number;
-  projectId?: number;
+  categoryId?: number;
   subject?: string;
   statusId?: number;
   deadLine?: string;
