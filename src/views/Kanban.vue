@@ -1,7 +1,7 @@
 <template>
   <v-row no-gutters>
     <v-col cols="2">
-      <v-card class="grey lighten-3" min-height="800" outlined tile>
+      <v-card class="grey lighten-3" min-height="875" outlined tile>
         <v-list class="grey lighten-3" shaped>
           <v-subheader>カテゴリー</v-subheader>
           <v-list-item-group>
@@ -27,13 +27,13 @@
     </v-col>
 
     <v-col cols="10">
-      <v-card min-height="800" outlined tile>
+      <v-card min-height="875" outlined tile>
         <v-card-text>
           <data-table
             class="ma-5"
             :data="taskData"
             :header="header"
-            :useSearch="true"
+            :useSearch="false"
           >
             <template v-slot:[`item.categoryId`]="{ item }">
               <v-chip
@@ -59,6 +59,14 @@
         </v-card-text>
       </v-card>
     </v-col>
+    <v-overlay :absolute="absolute" :value="isLoading">
+      <v-progress-circular
+        :size="70"
+        :width="7"
+        color="green"
+        indeterminate
+      ></v-progress-circular>
+    </v-overlay>
   </v-row>
 </template>
 
@@ -78,8 +86,8 @@
     },
   })
   export default class Kanban extends Vue {
+    isLoading: boolean = false;
     search: String = '';
-    selectedCategory: String = '';
     taskData: TaskData[] = [];
     header: DataTableHeader[] = [
       {
@@ -96,6 +104,7 @@
     statusData: StatusData[] = [];
 
     async created() {
+      this.isLoading = true;
       await axios
         .post('/kanban/get-data')
         .then((res: AxiosResponse) => {
@@ -108,6 +117,10 @@
       this.taskData = taskStore.GET_TASK_LIST;
       this.categoryData = categoryStore.GET_CATEGORY_DATA;
       this.statusData = statusStore.GET_STATUS_DATA;
+    }
+
+    updated() {
+      this.isLoading = false;
     }
 
     getCategoryProperty(
