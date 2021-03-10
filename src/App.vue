@@ -1,12 +1,12 @@
 <template>
   <v-app>
-    <!-- <side-bar v-if="$route.name != 'login'"></side-bar> -->
     <top-bar v-if="$route.name != 'login'"></top-bar>
-    <v-content>
-      <v-main>
+    <side-bar v-if="$route.name != 'login'"></side-bar>
+    <v-main>
+      <v-container class="ma-0 pa-0" fluid fill-height>
         <router-view></router-view>
-      </v-main>
-    </v-content>
+      </v-container>
+    </v-main>
   </v-app>
 </template>
 
