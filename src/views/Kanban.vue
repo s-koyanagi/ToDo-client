@@ -1,6 +1,6 @@
 <template>
-  <v-row no-gutters>
-    <v-col cols="2">
+  <v-row>
+    <!-- <v-col cols="2">
       <v-card class="grey lighten-3" min-height="875" outlined tile>
         <v-list class="grey lighten-3" shaped>
           <v-subheader>カテゴリー</v-subheader>
@@ -24,9 +24,9 @@
           </v-list-item-group>
         </v-list>
       </v-card>
-    </v-col>
+    </v-col> -->
 
-    <v-col cols="10">
+    <v-col cols="">
       <v-card min-height="875" outlined tile>
         <v-card-text>
           <data-table
