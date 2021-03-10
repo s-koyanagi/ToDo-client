@@ -1,9 +1,10 @@
 <template>
   <v-app-bar
     absolute
-    color="teal lighten-3"
     dark
     hide-on-scroll
+    clipped-left
+    color="teal lighten-3"
     scroll-target="#scrolling-techniques-4"
     app
   >

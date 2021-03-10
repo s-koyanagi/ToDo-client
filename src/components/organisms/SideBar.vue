@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer app>
+  <v-navigation-drawer clipped expand-on-hover permanent app>
     <v-list-item>
       <v-list-item-content>
         <v-list-item-title class="title"> Application </v-list-item-title>
