@@ -7,7 +7,7 @@
         </v-list-item-avatar>
       </v-list-item>
 
-      <v-list-item link>
+      <v-list-item>
         <v-list-item-content>
           <v-list-item-title class="title">
             {{ userData.fullName }}
@@ -19,7 +19,31 @@
 
     <v-divider></v-divider>
 
-    <v-list dense nav> </v-list>
+    <v-list nav dense>
+      <v-list-item link>
+        <v-list-item-icon>
+          <v-icon>mdi-folder</v-icon>
+        </v-list-item-icon>
+        <v-list-item-title>My Files</v-list-item-title>
+      </v-list-item>
+      <v-list-item link>
+        <v-list-item-icon>
+          <v-icon>mdi-account-multiple</v-icon>
+        </v-list-item-icon>
+        <v-list-item-title>Shared with me</v-list-item-title>
+      </v-list-item>
+      <v-list-item link>
+        <v-list-item-icon>
+          <v-icon>mdi-star</v-icon>
+        </v-list-item-icon>
+        <v-list-item-title>Starred</v-list-item-title>
+      </v-list-item>
+      <v-list-group :value="true" prepend-icon="mdi-account-circle">
+        <template v-slot:activator>
+          <v-list-item-title>Users</v-list-item-title>
+        </template>
+      </v-list-group>
+    </v-list>
   </v-navigation-drawer>
 </template>
 <script lang="ts">
