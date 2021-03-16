@@ -23,7 +23,7 @@
       <v-divider></v-divider>
 
       <v-list nav dense>
-        <v-list-item link @click="isTaskFormDialogVisible = true">
+        <v-list-item link @click.stop="isTaskFormDialogVisible = true">
           <v-list-item-icon>
             <v-icon>mdi-pen-plus</v-icon>
           </v-list-item-icon>
@@ -54,7 +54,8 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <task-form-dialog :isVisible="isTaskFormDialogVisible"> </task-form-dialog>
+    <task-form-dialog :isVisible.sync="isTaskFormDialogVisible">
+    </task-form-dialog>
   </div>
 </template>
 

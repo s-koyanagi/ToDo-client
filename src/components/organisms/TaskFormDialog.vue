@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="isVisible" width="500">
+  <v-dialog v-model="isVisible" @click:outside="closeDialog" width="500">
     <v-card>
       <v-card-title class="headline grey lighten-2">
         Privacy Policy
@@ -19,7 +19,7 @@
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="primary" text @click="isVisible = false">
+        <v-btn color="primary" text @click="closeDialog">
           I accept
         </v-btn>
       </v-card-actions>
@@ -33,5 +33,10 @@
   export default class TaskFormDialog extends Vue {
     @Prop()
     private isVisible!: boolean;
+
+    closeDialog() {
+      this.isVisible = false;
+      this.$emit('update:isVisible', this.isVisible);
+    }
   }
 </script>
