@@ -3,7 +3,6 @@
     ref="menu"
     v-model="isPickerOpen"
     :close-on-content-click="false"
-    :return-value.sync="selectedDate"
     transition="scale-transition"
     offset-y
     min-width="auto"
