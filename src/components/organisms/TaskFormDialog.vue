@@ -27,30 +27,7 @@
             <v-subheader>期限</v-subheader>
           </v-col>
           <v-col cols="5">
-            <v-menu
-              ref="menu1"
-              v-model="menu1"
-              :close-on-content-click="false"
-              transition="scale-transition"
-              offset-y
-              max-width="290px"
-              min-width="auto"
-            >
-              <template v-slot:activator="{ on, attrs }">
-                <v-text-field
-                  v-model="dateFormatted"
-                  label="日付"
-                  v-bind="attrs"
-                  @blur="date = parseDate(dateFormatted)"
-                  v-on="on"
-                ></v-text-field>
-              </template>
-              <v-date-picker
-                v-model="form.deadLine"
-                no-title
-                @input="menu1 = false"
-              ></v-date-picker>
-            </v-menu>
+            <date-picker :date.sync="form.deadLine"> </date-picker>
           </v-col>
         </v-row>
       </v-container>
@@ -69,6 +46,7 @@
 <script lang="ts">
   import { Component, Vue, Prop } from 'vue-property-decorator';
   import { categoryStore } from '@/store/modules/category';
+  import DatePicker from '../molecules/DatePicker.vue';
 
   export interface TaskForm {
     categoryId?: Number;
@@ -76,14 +54,20 @@
     deadLine?: string;
   }
 
-  @Component
+  @Component({
+    components: {
+      DatePicker,
+    },
+  })
   export default class TaskFormDialog extends Vue {
     @Prop()
     private isVisible!: boolean;
 
     private form: TaskForm = {};
+    private isPickerVisible: boolean = false;
 
     closeDialog() {
+      console.log(this.form);
       this.isVisible = false;
       this.$emit('update:isVisible', this.isVisible);
     }
