@@ -10,18 +10,13 @@
   >
     <template v-slot:activator="{ on, attrs }">
       <v-text-field
-        v-model="textFieldValue"
+        v-model="selectedDate"
         readonly
         v-bind="attrs"
         v-on="on"
       ></v-text-field>
     </template>
-    <v-date-picker
-      v-model="selectedDate"
-      no-title
-      scrollable
-      @input="selectDate"
-    >
+    <v-date-picker no-title scrollable @input="selectDate($event)">
     </v-date-picker>
   </v-menu>
 </template>
@@ -35,11 +30,10 @@
     private date?: string;
     private isPickerOpen: boolean = false;
     private selectedDate: string = '';
-    private textFieldValue: string = '';
 
-    selectDate() {
-      this.textFieldValue = this.selectedDate;
-      this.$emit('update:date', this.selectedDate);
+    selectDate(value: string) {
+      this.selectedDate = value;
+      this.$emit('update:date', value);
       this.isPickerOpen = false;
     }
   }
