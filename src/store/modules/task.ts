@@ -9,6 +9,7 @@ import {
 import store from '../index';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { TaskData } from '@/types/types';
+import TaskForm from '@/models/form/taskForm';
 
 @Module({
   dynamic: true,
@@ -46,6 +47,13 @@ class Task extends VuexModule {
   @Action({ rawError: true })
   async setTaskList(taskList: TaskData[]) {
     this.SET_TASK_LIST(taskList);
+  }
+
+  @Action({ rawError: true })
+  async submitTask(taskForm: TaskForm) {
+    await axios.post('/task/create').then((res: AxiosResponse) => {
+      console.log(res.status);
+    });
   }
 
   get GET_TASK_LIST(): TaskData[] {
