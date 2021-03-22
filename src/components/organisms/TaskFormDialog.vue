@@ -36,7 +36,7 @@
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="primary" text @click="closeDialog">
+        <v-btn color="primary" text @click="taskFormSubmit">
           追加
         </v-btn>
       </v-card-actions>
@@ -46,13 +46,9 @@
 <script lang="ts">
   import { Component, Vue, Prop } from 'vue-property-decorator';
   import { categoryStore } from '@/store/modules/category';
+  import { taskStore } from '@/store/modules/task';
   import DatePicker from '../molecules/DatePicker.vue';
-
-  export interface TaskForm {
-    categoryId?: Number;
-    subject?: string;
-    deadLine?: string;
-  }
+  import TaskForm from '@/models/form/taskForm';
 
   @Component({
     components: {
@@ -61,15 +57,16 @@
   })
   export default class TaskFormDialog extends Vue {
     @Prop()
-    private isVisible!: boolean;
-
+    private isVisible?: boolean;
     private form: TaskForm = {};
-    private isPickerVisible: boolean = false;
+
+    async taskFormSubmit() {
+      await taskStore.submitTask(this.form);
+      this.closeDialog();
+    }
 
     closeDialog() {
-      console.log(this.form);
-      this.isVisible = false;
-      this.$emit('update:isVisible', this.isVisible);
+      this.$emit('update:isVisible', false);
     }
 
     get getCategory() {
