@@ -51,9 +51,12 @@ class Task extends VuexModule {
 
   @Action({ rawError: true })
   async submitTask(taskForm: TaskForm) {
-    await axios.post('/task/create').then((res: AxiosResponse) => {
-      console.log(res.status);
-    });
+    await axios
+      .post('/task/create', taskForm)
+      .then((res: AxiosResponse) => {
+        this.SET_TASK_LIST(res.data);
+      })
+      .catch((err: AxiosError) => {});
   }
 
   get GET_TASK_LIST(): TaskData[] {
