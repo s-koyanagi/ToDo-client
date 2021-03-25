@@ -10,7 +10,13 @@
             <v-subheader>カテゴリー</v-subheader>
           </v-col>
           <v-col cols="3">
-            <v-select :items="getCategory" v-model="form.categoryId" dense>
+            <v-select
+              :items="getCategory"
+              v-model="form.categoryId"
+              dense
+              item-text="categoryName"
+              item-value="categoryId"
+            >
             </v-select>
           </v-col>
         </v-row>
@@ -70,9 +76,7 @@
     }
 
     get getCategory() {
-      return categoryStore.GET_CATEGORY_DATA.map(v => {
-        return v.categoryName;
-      });
+      return categoryStore.GET_CATEGORY_DATA;
     }
   }
 </script>
