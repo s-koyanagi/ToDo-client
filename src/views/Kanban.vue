@@ -31,7 +31,7 @@
         <v-card-text>
           <data-table
             class="ma-5"
-            :data="taskData"
+            :data="getTaskList"
             :header="header"
             :useSearch="false"
           >
@@ -161,6 +161,11 @@
           v => v.categoryId == categoryId
         );
       }
+    }
+
+    get getTaskList() {
+      this.taskData = taskStore.GET_TASK_LIST;
+      return this.taskData;
     }
   }
 </script>
