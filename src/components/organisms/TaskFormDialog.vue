@@ -69,6 +69,7 @@
     async taskFormSubmit() {
       await taskStore.submitTask(this.form);
       this.closeDialog();
+      this.form = {};
     }
 
     closeDialog() {
