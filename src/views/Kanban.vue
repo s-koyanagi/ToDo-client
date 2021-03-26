@@ -87,8 +87,9 @@
   })
   export default class Kanban extends Vue {
     isLoading: boolean = false;
-    search: String = '';
     taskData: TaskData[] = [];
+    categoryData: CategoryData[] = [];
+    statusData: StatusData[] = [];
     header: DataTableHeader[] = [
       {
         text: 'カテゴリー',
@@ -100,8 +101,6 @@
       { text: '状態', align: 'center', value: 'statusId', width: '100' },
       { text: '期限', align: 'center', value: 'deadLine', width: '150' },
     ];
-    categoryData: CategoryData[] = [];
-    statusData: StatusData[] = [];
 
     async created() {
       this.isLoading = true;
@@ -113,7 +112,6 @@
           statusStore.setStatusData(res.data.statusData);
         })
         .catch((err: AxiosError) => {});
-
       this.taskData = taskStore.GET_TASK_LIST;
       this.categoryData = categoryStore.GET_CATEGORY_DATA;
       this.statusData = statusStore.GET_STATUS_DATA;
