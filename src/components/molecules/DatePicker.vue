@@ -31,7 +31,6 @@
     private selectedDate: string = '';
 
     selectDate(value: string) {
-      this.selectedDate = value;
       this.$emit('update:date', value);
       this.isPickerOpen = false;
     }
