@@ -6,33 +6,28 @@
       </v-card-title>
       <v-container fluid>
         <v-row>
-          <v-col cols="2">
+          <v-col cols="5">
             <v-subheader>カテゴリー</v-subheader>
-          </v-col>
-          <v-col cols="3">
             <v-select
               :items="getCategory"
               v-model="form.categoryId"
               dense
               item-text="categoryName"
               item-value="categoryId"
+              class="ml-4"
             >
             </v-select>
           </v-col>
         </v-row>
         <v-row>
-          <v-col cols="2">
-            <v-subheader>件名</v-subheader>
-          </v-col>
           <v-col cols="5">
-            <v-text-field label="件名" v-model="form.subject"> </v-text-field>
+            <v-subheader>件名</v-subheader>
+            <v-text-field v-model="form.subject" class="ml-4"> </v-text-field>
           </v-col>
         </v-row>
         <v-row>
-          <v-col cols="2">
-            <v-subheader>期限</v-subheader>
-          </v-col>
           <v-col cols="5">
+            <v-subheader>期限</v-subheader>
             <date-picker :date.sync="form.deadLine"> </date-picker>
           </v-col>
         </v-row>
