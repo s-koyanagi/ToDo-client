@@ -10,9 +10,13 @@
     <template v-slot:activator="{ on, attrs }">
       <v-text-field
         v-model="date"
-        readonly
         v-bind="attrs"
         v-on="on"
+        class="ml-4"
+        prepend-inner-icon="mdi-calendar"
+        readonly
+        outlined
+        dense
       ></v-text-field>
     </template>
     <v-date-picker no-title scrollable @input="selectDate($event)">
