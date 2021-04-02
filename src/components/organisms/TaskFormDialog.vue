@@ -1,32 +1,34 @@
 <template>
-  <v-dialog v-model="isVisible" @click:outside="closeDialog" width="1000">
+  <v-dialog v-model="isVisible" @click:outside="closeDialog" width="800">
     <v-card>
       <v-card-title class="headline grey lighten-2">
         タスクの追加
       </v-card-title>
       <v-container fluid>
-        <v-row>
-          <v-col cols="5">
+        <v-row dense>
+          <v-col cols="3">
             <v-subheader>カテゴリー</v-subheader>
             <v-select
               :items="getCategory"
               v-model="form.categoryId"
-              dense
               item-text="categoryName"
               item-value="categoryId"
               class="ml-4"
+              outlined
+              dense
             >
             </v-select>
           </v-col>
         </v-row>
-        <v-row>
-          <v-col cols="5">
+        <v-row dense>
+          <v-col cols="8">
             <v-subheader>件名</v-subheader>
-            <v-text-field v-model="form.subject" class="ml-4"> </v-text-field>
+            <v-text-field v-model="form.subject" class="ml-4" outlined dense>
+            </v-text-field>
           </v-col>
         </v-row>
-        <v-row>
-          <v-col cols="5">
+        <v-row dense>
+          <v-col cols="3">
             <v-subheader>期限</v-subheader>
             <date-picker :date.sync="form.deadLine"> </date-picker>
           </v-col>
