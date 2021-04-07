@@ -20,6 +20,10 @@
       :search="search"
       :footer-props="{ disableItemsPerPage: true }"
     >
+      <template v-slot:[`footer.page-text`]="props">
+        {{ props.itemsLength }} 件中 {{ props.pageStart }} 件から
+        {{ props.pageStop }} 件までを表示
+      </template>
       <template
         v-for="(slotContent, slotName) of $scopedSlots"
         #[slotName]="item"
