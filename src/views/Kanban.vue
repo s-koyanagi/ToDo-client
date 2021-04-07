@@ -1,31 +1,5 @@
 <template>
   <v-row>
-    <!-- <v-col cols="2">
-      <v-card class="grey lighten-3" min-height="875" outlined tile>
-        <v-list class="grey lighten-3" shaped>
-          <v-subheader>カテゴリー</v-subheader>
-          <v-list-item-group>
-            <v-list-item
-              v-for="(item, i) in categoryData"
-              :key="i"
-              @click="filterByCategory(item.categoryId)"
-            >
-              <v-list-item-icon>
-                <v-icon v-bind:color="item.color" size="15"
-                  >mdi-checkbox-blank-circle</v-icon
-                >
-              </v-list-item-icon>
-              <v-list-item-content>
-                <v-list-item-title
-                  v-text="item.categoryName"
-                ></v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-          </v-list-item-group>
-        </v-list>
-      </v-card>
-    </v-col> -->
-
     <v-col cols="">
       <v-card min-height="875" outlined tile>
         <v-card-text>
@@ -177,5 +151,8 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+  }
+  .v-data-footer__select {
+    display: none;
   }
 </style>
